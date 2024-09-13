@@ -51,11 +51,7 @@ function Cow(x, y, direction)
     this.walk = function(i)
     {
         this.x += this.direction;
-        if ((this.x > flying_nlo.x-flying_nlo.width/4) && (this.x < flying_nlo.x+flying_nlo.width/4)){
-            cows.splice(i,1);
-            count += 1;
-            t=1;
-        }
+
     }
 
     this.draw = function()
@@ -98,14 +94,16 @@ function CowManager()
         for (let i = 0; i < cows.length; i++)
         {
             cows[i].walk(i);
-            if (t==1){
-                t=0;
+            if ((cows[i].x > flying_nlo.x-flying_nlo.width/4) && (cows[i].x < flying_nlo.x+flying_nlo.width/4)){
+                cows.splice(i,1);
+                count += 1;
                 break;
-            };
+            }else{
             if (cows[i].x > width + 100)
                 cows[i].x = 0;
             else if (cows[i].x < - 100)
                 cows[i].x = width;
+        }
         }
     }
 
