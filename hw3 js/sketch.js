@@ -24,7 +24,6 @@ function preload()
     sound.setVolume(0.2); // Устанавливаем громкость на 20%
 }
 
-
 function setup()
 {
     createCanvas(1024, 1024);
@@ -51,27 +50,13 @@ function draw()
         let level = amplitude.getLevel();
         amplitudes.push(level);
         amplitudes.shift();
-//        text(level, width/2, 40);
         text('Press Z on yellow circles to get points!', width/2, 40);
         
-//        let size = map(level, 0, 0.20, 100, 200);
-//        ellipse(width/2, height/2, size, size);
-        
         let freqs = fft.analyze();
-        
-        stroke(0, 150, 0);
-//        for(let i = 0; i < freqs.length; i++)
-//            line(i, height, i, height - freqs[i] * 4);
-        
-       
         noStroke();
-        
 
-        
-        osu();
-        
-    }
-        
+        osu();  
+    }  
 }
 
 function keyPressed()
@@ -95,44 +80,37 @@ function keyPressed()
 }
 
 function osu()
-{   
-    
-            
+{       
     let energy = fft.getEnergy("bass");
     fill("#FF0000");
     circle(125, height/2 - energy * 2, 50, 50);
     circle(125, height/2 + energy * 2, 50, 50);
-//        rect(100, height/2 - energy * 2, 50, energy * 4);
-
+    
     let low_energy = fft.getEnergy("lowMid");
     fill("#FF0000");
     circle(325, height/2 - low_energy * 2, 50, 50);
     circle(325, height/2 + low_energy * 2, 50, 50);
-//        rect(300, 1024 - low_energy, 50, low_energy);
-
+    
     let mid_energy = fft.getEnergy("mid");
     fill("#FF0000");
     circle(525, height/2 - mid_energy * 2, 50, 50);
     circle(525, height/2 + mid_energy * 2, 50, 50);
-//        rect(500, 1024 - mid_energy, 50, mid_energy);
 
     let high_energy = fft.getEnergy("highMid"); 
     fill("#FF0000");
     circle(725, height/2 - high_energy * 2, 50, 50);
     circle(725, height/2 + high_energy * 2, 50, 50);
-//        rect(700, 1024 - high_energy, 50, high_energy);
-        
+      
     let treble_energy = fft.getEnergy("treble");
     fill("#FF0000");
     circle(925, height/2 - treble_energy * 2, 50, 50);
     circle(925, height/2 + treble_energy * 2, 50, 50);
-//        rect(900, 1024 - treble_energy, 50, treble_energy);
-    
+
     let energies = [energy, low_energy, mid_energy, high_energy,treble_energy];
+    
     let px = mouseX;
     let py = mouseY;
-//    text(px,50,50);
-//    text(py,50,100);
+    
     fill("#FFFF00");
     text("Touches: "+count,100,50);
     text("Rate: "+parseFloat(r).toFixed(2),100,100);
@@ -146,17 +124,15 @@ function osu()
         }else{
             updown = -1;
         }
-        
         clicked = false;
     }
     
     if ((clicked == false) && (key == 'z') && (px > (bx - 25)) && (px < (bx + 25)) && (py > (height/2 + updown * energies[by] * 2)-25) && (py < (height/2 + updown * energies[by] * 2)+25)){
         clicked = true;
-        count++;
-        
+        count++;  
     }
+    
     fill("#FFFF00");
     circle(bx, height/2 + updown * energies[by] * 2, 50, 50);
     key = 'x';
-
 }
