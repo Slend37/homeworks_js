@@ -10,9 +10,17 @@ public class Main
         int n2 = reader.nextInt();
         reader.close();
         
-        for (int i = n1; i < n2; i++){
-            if (i%2 == 0){
-                System.out.println(i);
+        if (n1<n2){
+            for (int i = n1; i < n2; i++){
+                if (i%2 == 0){
+                    System.out.println(i);
+                }
+            }
+        }else{
+            for (int i = n2; i < n1; i++){
+                if (i%2 == 0){
+                    System.out.println(i);
+                }
             }
         }
     }
