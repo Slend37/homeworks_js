@@ -31,10 +31,13 @@ function setup() {
 	var avgproj = sumproj / quiz.length;
 	var avgex = sumex / quiz.length;
 	var avgfm = sumfm / quiz.length;
-	myBar.addBar(20, avgquiz, 5, 'red');
-	myBar.addBar(30, avgproj, 5, 'blue');
-	myBar.addBar(40, avgex, 5, 'green');
-	myBar.addBar(50, avgfm, 5, 'purple');
+	
+	let labels = ['quiz', 'project', 'exam', 'final mark'];
+	let colors = ['red', 'blue', 'green', 'purple'];
+	let data = [avgquiz, avgproj, avgex, avgfm];
+	
+	myBar.addBars(data, labels, colors);
+	
 	/**
 	myChar = new Chart(10, 10, 700, 700);
 	myChar.setupAxis(0, 100, 0, 100, 10, 10);
@@ -432,7 +435,14 @@ function Bar(x,y, width, height){
 		}
 	};
 	
-	this.addBar = function(xValue, yValue, width, colour){
+	this.addBars = function(data, labels, colors){
+		for (var i = 0; i<data.length; i++){
+			this.addBar(10+i*10, data[i], 5, colors[i], labels[i]);
+		}
+		
+	};
+	
+	this.addBar = function(xValue, yValue, width, colour, label){
 			if (xValue >= this.xMin && xValue <= this.xMax && yValue >= this.yMin && yValue <= this.yMax) {
 				var pointX = round(map(xValue, this.xMin, this.xMax, this.plotX, this.plotWidth + this.plotX));
 				var pointY = round(map(yValue, this.yMin, this.yMax, this.plotHeight + this.plotY, this.plotY));
@@ -443,6 +453,12 @@ function Bar(x,y, width, height){
 				stroke(0);
 				strokeWeight(3);
 				rect(pointX - (width/2) * this.scaledXTickSpacing/10, pointY, width*this.scaledXTickSpacing/10, this.plotHeight-pointY+this.scaledYTickSpacing/7);
+				noStroke();
+				fill(0);
+				textAlign(CENTER);
+				text(label, pointX, this.plotHeight + 40);
+			
 			}
 	};
+
 }
