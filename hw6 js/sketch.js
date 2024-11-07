@@ -28,17 +28,17 @@ function setup()
 	selectArea = {x: 0, y: 0, w: 100, h: 100};
 
 	penButton = createButton('Pen');
-	penButton.position(810,0);
+	penButton.position(810, 0);
 	
 	backButton = createButton('Background');
-	backButton.position(810,60);
+	backButton.position(810, 60);
 	
 	widthSelect = createInput(10);
-	widthSelect.position(850,0);
+	widthSelect.position(850, 0);
 	widthSelect.size(30);
 	
 	colorSelect = createSelect();
-	colorSelect.position(810,20);
+	colorSelect.position(810, 20);
 	colorSelect.option('🔴');
 	colorSelect.option('🔵');
 	colorSelect.option('🟢');
@@ -51,10 +51,10 @@ function setup()
 	colorSelect.selected('🔴');
 	
 	shapeButton = createButton('Shape');
-	shapeButton.position(810,40);
+	shapeButton.position(810, 40);
 	
 	clearButton = createButton('Clear');
-	clearButton.position(810,790);
+	clearButton.position(810, 790);
 	
 	penButton.mousePressed(() =>{
 		selectMode = 0;
@@ -71,7 +71,7 @@ function setup()
 	shapeButton.mousePressed(() => {
 		selectMode = 1;
 		shapeSelect = createSelect();
-		shapeSelect.position(870,40);
+		shapeSelect.position(870, 40);
 		shapeSelect.option('⬛');
 		shapeSelect.option('⚫️');
 	});
